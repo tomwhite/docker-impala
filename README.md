@@ -20,6 +20,18 @@ Perform a trivial query:
 docker-compose exec impala impala-shell -q 'select 1'
 ```
 
+Try more complex commands:
+
+```bash
+docker-compose exec impala impala-shell
+```
+
+```sql
+create table t1 (x int);
+insert into t1 values (1), (3), (2), (4);
+select min(x), max(x), sum(x), avg(x) from t1;
+```
+
 Shutdown the container with:
 
 ```bash
