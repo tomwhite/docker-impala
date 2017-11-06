@@ -3,10 +3,13 @@ FROM parrotstream/centos-openjdk
 USER root
 
 ADD cloudera-cdh5.repo /etc/yum.repos.d/
-RUN rpm --import https://archive.cloudera.com/cdh5/redhat/5/x86_64/cdh/RPM-GPG-KEY-cloudera
+ADD cloudera-kudu.repo /etc/yum.repos.d/
+RUN rpm --import https://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/RPM-GPG-KEY-cloudera
+RUN rpm --import https://archive.cloudera.com/kudu/redhat/7/x86_64/kudu/RPM-GPG-KEY-cloudera
 RUN yum install -y sudo \
     hadoop-hdfs-namenode hadoop-hdfs-datanode \
     postgresql hive hive-jdbc hive-metastore \
+    kudu kudu-master kudu-tserver \
     impala impala-server impala-shell impala-catalog impala-state-store
 RUN yum clean all
 
@@ -45,6 +48,9 @@ EXPOSE 50030 50060 13562 10020 19888
 
 # Hive
 EXPOSE 9083
+
+# Kudu
+EXPOSE 8050 7050 8051 7051
 
 # Impala
 EXPOSE 21000 21050 22000 23000 24000 25010 26000 28000
