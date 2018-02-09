@@ -5,6 +5,7 @@ USER root
 ADD cloudera-cdh5.repo /etc/yum.repos.d/
 RUN rpm --import https://archive.cloudera.com/cdh5/redhat/5/x86_64/cdh/RPM-GPG-KEY-cloudera
 RUN yum install -y sudo \
+    cyrus-sasl-plain \
     hadoop-hdfs-namenode hadoop-hdfs-datanode \
     postgresql hive hive-jdbc hive-metastore \
     impala impala-server impala-shell impala-catalog impala-state-store
